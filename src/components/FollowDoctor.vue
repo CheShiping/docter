@@ -2,17 +2,18 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import DoctorCard from './DoctorCard.vue'
 import { useWindowSize } from '@vueuse/core'
+import type { DoctorList } from '@/types/consult'
+import { getDoctorPage } from '@/services/consult'
 // 如果遇见一些常见的需求可以先看看 @vueuse/core 是否提供，这样可以提高开发效率。
 // 如果：窗口尺寸，滚动距离，是否进入可视区，倒计时，...等等。
 const { width } = useWindowSize()
-// const setWidth = () => (width.value = window.innerWidth)
-// onMounted(() => {
-//   setWidth()
-//   window.addEventListener('resize', setWidth)
-// })
-// onUnmounted(() => {
-//   window.removeEventListener('resize', setWidth)
-// })
+
+const list = ref<DoctorList>()
+const loadData = async () => {
+  const res = await getDoctorPage({ current: 1, pageSize: 5 })
+  list.value = res.data.rows
+}
+onMounted(() => loadData())
 </script>
 
 <template>
@@ -24,8 +25,8 @@ const { width } = useWindowSize()
     <div class="body">
       <!-- 去除 指示器，关闭 无缝滚动，设置一次滚动一个卡片 -->
       <van-swipe :width="(150 / 375) * width" :show-indicators="false" :loop="false">
-        <van-swipe-item v-for="item in 5" :key="item">
-          <doctor-card />
+        <van-swipe-item v-for="item in list" :key="item.id">
+          <doctor-card :item="item" />
         </van-swipe-item>
       </van-swipe>
     </div>
