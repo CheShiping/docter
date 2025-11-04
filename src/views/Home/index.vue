@@ -81,7 +81,7 @@ const active = ref(1)
     <!-- 知识列表 -->
     <van-tabs shrink sticky v-model:active="active">
       <van-tab title="关注">
-        <follow-docktor></follow-docktor>
+        <follow-doctor></follow-doctor>
         <knowledge-list type="like" />
       </van-tab>
       <van-tab title="推荐"><knowledge-list type="recommend" /></van-tab>
