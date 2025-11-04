@@ -8,6 +8,8 @@
 import type CpIcon from '@/components/CpIcon.vue'
 import type CpNavBar from '@/components/CpNavBar.vue'
 import type CpRadioBtn from '@/components/CpRadioBtn.vue'
+import type KnowledgeCard from '@/components/KnowledgeCard.vue'
+import type KnowledgeList from '@/components/KnowledgeList.vue'
 
 declare module 'vue' {
   // 3. 给 vue  添加全局组件类型，interface 和之前的合并
@@ -17,5 +19,7 @@ declare module 'vue' {
     CpNavBar: typeof CpNavBar
     CpIcon: typeof CpIcon
     CpRadioBtn: typeof CpRadioBtn
+    KnowledgeCard: typeof KnowledgeCard
+    KnowledgeList: typeof KnowledgeList
   }
 }
